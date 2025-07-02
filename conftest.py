@@ -1,4 +1,4 @@
-# conftest.py  (project root)
+## conftest.py  (project root)
 
 import pytest
 from selenium import webdriver
@@ -15,6 +15,7 @@ def driver():
         service=Service(ChromeDriverManager().install()),
         options=options
     )
+
     drv.implicitly_wait(10)
-    yield driver
+    yield drv
     drv.quit()

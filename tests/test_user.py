@@ -6,15 +6,16 @@ import time
 def test_open_user_page(driver):
     # ── 1. Sign in ─────────────────────────────────────────────
     signin = signinPage(driver)
-    signin.login("superadmin@insurance.com", "Insurance@123")
+    #signin.login("info@klcrinvestigations.com", "Insurance@123") #- Staging server
+    signin.login("superadmin@insurance.com", "Insurance@123") # 67 server
 
-    # # ── 2. Open the left‑hand drawer (hamburger) ───────────────
-    # driver.find_element(By.XPATH,'/html/body/div/div[2]/div/div[1]/div/div[1]/button').click()
-    # time.sleep(2)
+    # ── 2. Open the left‑hand drawer (hamburger) ───────────────
+    driver.find_element(By.XPATH,'/html/body/div/div[2]/div/div[1]/div/div[1]/button').click()
+    time.sleep(2)
 
-    # Click System -> User
-    # driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[1]/div/div[2]/ul/div[2]/button').click()
-    # time.sleep(1)
+    #Click System -> User
+    driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[1]/div/div[2]/ul/div[2]/button').click()
+    time.sleep(1)
     driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[1]/div/div[2]/ul/div[3]/div/div/div/div[2]/div[2]/span').click()
     time.sleep(2)
 

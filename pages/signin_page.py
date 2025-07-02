@@ -1,9 +1,9 @@
-import pytest
 from selenium.webdriver.common.by import By
 
 class signinPage:
     def __init__(self, driver):
-        self.driver = (driver)
+        self.driver = driver
+
     def login(self, username, password):
         self.driver.get("http://67.205.148.222/insurance/app/auth/signin/")
         self.driver.maximize_window()

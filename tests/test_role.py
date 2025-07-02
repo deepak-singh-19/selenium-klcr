@@ -1,13 +1,12 @@
 # tests/test_role.py
-import pytest
-
 from pages.signin_page import signinPage
 from selenium.webdriver.common.by import By
 import time
 
 def test_open_role_page(driver):
-    signin = signinPage(driver)
-    signin.login("superadmin@insurance.com", "Insurance@123")
+    #signinPage(driver).login("info@klcrinvestigations.com", "Insurance@123") #for staging
+    signinPage(driver).login("superadmin@insurance.com", "Insurance@123")   # for 67server
+
 
     # Click on left drawer button
     driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[1]/div/div[1]/button').click()
