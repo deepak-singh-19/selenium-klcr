@@ -4,8 +4,7 @@ from selenium.webdriver.common.by import By
 import time
 
 def test_open_role_page(driver):
-    #signinPage(driver).login("info@klcrinvestigations.com", "Insurance@123") #for staging
-    signinPage(driver).login("superadmin@insurance.com", "Insurance@123")   # for 67server
+    signinPage(driver).login("info@klcrinvestigations.com", "Insurance@123")
 
 
     # Click on left drawer button
