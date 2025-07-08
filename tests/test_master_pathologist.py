@@ -8,8 +8,8 @@ def test_open_pathologist_page(driver):
     signin.login("info@klcrinvestigations.com", "Insurance@123")
 
     #── 2. Open the left‑hand drawer (hamburger) ───────────────
-    # driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[1]/div/div[1]/button').click()
-    # time.sleep(2)
+    driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[1]/div/div[1]/button').click()
+    time.sleep(2)
 
     # Click Master -> Pathologist
     driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[1]/div/div[2]/ul/div[3]/div[2]/span').click()
