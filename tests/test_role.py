@@ -1,49 +1,43 @@
-# tests/test_role.py
 from pages.signin_page import signinPage
 from selenium.webdriver.common.by import By
-import time
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 def test_open_role_page(driver):
+    wait = WebDriverWait(driver, 10)
+
+    # 1. Login
     signinPage(driver).login("info@klcrinvestigations.com", "Insurance@123")
 
+    # 2. Ensure drawer is open (toggle if needed)
+    if not driver.find_elements(By.XPATH, "//span[normalize-space()='System']"):
+        wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@role='button'][1]"))).click()
 
-    #Click on left drawer button
-    driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[1]/div/div[1]/button').click()
-    time.sleep(2)
+    # 3. Navigate: System -> Role
+    wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='System']"))).click()
+    wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/div[2]/div/div[1]/div/div[2]/ul/div[3]/div/div/div/div[1]/div[2]/span'))).click()
 
-    # Click System -> Role
-    driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[1]/div/div[2]/ul/div[2]/button').click()
-    time.sleep(1)
-    driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[1]/div/div[2]/ul/div[3]/div/div/div/div[1]/div[2]/span').click()
-    time.sleep(2)
+    # 4. Open 'Add Role' modal
+    wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div[2]/div[3]/button[2]'))).click()
 
-    # Open the Add role page
-    driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div[2]/div[3]/button[2]').click()
-    time.sleep(2)
-    driver.find_element(By.NAME, 'roleName').send_keys("Admin") # enter the role name
-    time.sleep(2)
+    # 5. Fill form: Role name = Admin
+    wait.until(EC.visibility_of_element_located((By.NAME, 'roleName'))).send_keys("Admin")
 
-    #close the add role page
-    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[2]/form/div[3]/button[2]').click()
-    time.sleep(2)
+    # 6. Close 'Add Role' modal (cancel button)
+    wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[1]/button'))).click()
 
-    # open view role page
-    driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[1]/div[5]/div/button[1]').click()
-    time.sleep(4)
-    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[1]/button').click() # close the view role page
+    # 7. View Role
+    wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[5]/div/button[1]'))).click()
+    wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[1]/button'))).click()
 
-    # open edit role page
-    driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[1]/div[5]/div/button[2]').click()
-    time.sleep(4)
-    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[1]/button').click() # close the edit role page
-    time.sleep(2)
+    # 8. Edit Role
+    wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[5]/div/button[2]'))).click()
+    wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[1]/button'))).click()
 
-    #open the delete role confirmation message
-    driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[1]/div[5]/div/button[3]').click()  #Open the delete confirmation message
-    time.sleep(4)
-    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div/div/div[2]/button[2]').click()  #click on the not now button
-    time.sleep(2)
+    # 9. Delete Role (but cancel deletion)
+    wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[5]/div/button[3]'))).click()
+    wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div/div/div[2]/button[2]'))).click()
 
-    # Assert that the Role page is open
+    # 10. Final assertion
     assert "role" in driver.current_url.lower()
-    print("Role page opened successfully")
+    print("✅ Role page opened successfully")
