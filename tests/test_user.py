@@ -18,6 +18,12 @@ def test_open_user_page(driver):
     driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[1]/div/div[2]/ul/div[3]/div/div/div/div[2]/div[2]/span').click()
     time.sleep(2)
 
+    #Open Add User page
+    driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div[2]/div[3]/button').click()
+    time.sleep(2)
+    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[1]/button').click() #Click on the cancel icon
+    time.sleep(2)
+
     # Assert that the User page is open
     assert "user" in driver.current_url.lower()
     print("User page opened successfully")
