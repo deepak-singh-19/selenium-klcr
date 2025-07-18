@@ -8,8 +8,8 @@ def ensure_drawer_expanded(driver, wait):
     Ensures the left-hand drawer/sidebar is expanded.
     Idempotent: does nothing if already expanded and 'System' is visible.
     """
-    SYSTEM_XPATH = '//*[@id=":r39:"]'
-    DRAWER_TOGGLE_XPATH = '//*[@id=":r0:"]'
+    SYSTEM_XPATH = '//*[@id=":r4:"]'
+    DRAWER_TOGGLE_XPATH = '//*[@id=":r3:"]'
     # If the "System" link is not visible, the drawer is probably collapsed.
     if not driver.find_elements(By.XPATH, SYSTEM_XPATH):
         try:
