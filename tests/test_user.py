@@ -1,6 +1,29 @@
 from pages.signin_page import signinPage
 from selenium.webdriver.common.by import By
+from faker import Faker
+import random
 import time
+
+def generate_random_user_data():
+    fake = Faker('en_In')
+    user_type = ['Investigator', 'Report writer', 'Manager']
+    role = ['Investigator', 'Report writer', 'Manager', 'Admin']
+    state = ['Uttar Pradesh', 'Madhay Pradesh', 'Rajasthan', 'Bihar']
+    city = ['Lucknow', 'Prayagraj', 'Agra', 'Indore', 'Bhopal', 'Jaipur', 'Udaipur', 'Patna']
+    data = {
+        "first_name": fake.first_name(),
+        "last_name": fake.last_name(),
+        "user_type": random.choice(user_type),
+        "role": random.choice(role),
+        "email": fake.unique.email(),
+        "mobile": fake.msisdn()[:10],
+        "state": random.choice(state),
+        "city": random.choice(city),
+        "address": fake.address().replace("\n", " "),
+        "aadhar_number": str(fake.random_int(min=100000000000, max=999999999999)),
+        "pan_number": fake.bothify(text='?????####?'),  # Example format: ABCDE1234F
+    }
+    return data
 
 
 def test_open_user_page(driver):
@@ -21,8 +44,53 @@ def test_open_user_page(driver):
     #Open Add User page
     driver.find_element(By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div[2]/div[3]/button').click()
     time.sleep(2)
-    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[1]/button').click() #Click on the cancel icon
+
+    #-----fill form with random data
+    user_data = generate_random_user_data()
+    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[1]/div/div/input').send_keys(user_data['first_name'])
     time.sleep(2)
+    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[2]/div/div/input').send_keys(user_data['last_name'])
+    time.sleep(2)
+
+    #---Select the user type
+    # driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[3]/div/div[2]/div/div/input').click()
+    # time.sleep(2)
+    # driver.find_element(By.XPATH, f"//li[normalize-space()='{user_data['user_type']}']").click()
+    # time.sleep(2)
+
+    #--------Select the role data
+    # driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[4]/div/div[2]/div/div/input').click()
+    # time.sleep(2)
+    # driver.find_element(By.XPATH, f"//li[normalize-space()='{user_data['role']}']").click()
+    # time.sleep(2)
+
+    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[5]/div/div/input').send_keys(user_data['email'])
+    time.sleep(2)
+    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[6]/div/div/div/input').send_keys(user_data['mobile'])
+    time.sleep(2)
+
+    #------Select state data
+    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[7]/div/div/div/div/input').click()
+    time.sleep(2)
+    driver.find_element(By.XPATH, f"//li[normalize-space()='{user_data['state']}']").click()
+    time.sleep(2)
+
+    #------Select city data
+    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[15]/div/div[2]/div/div/input').click()
+    time.sleep(2)
+    driver.find_element(By.XPATH, f"//li[normalize-space()='{user_data['city']}']").click()
+    time.sleep(2)
+
+    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[9]/div/div/input').send_keys(user_data['address'])
+    time.sleep(2)
+    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[17]/div/div/div/input').send_keys(user_data['aadhar_number'])
+    time.sleep(2)
+    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[18]/div/div/div/input').send_keys(user_data['pan_number'])
+    time.sleep(2)
+
+
+    # driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[1]/button').click() #Click on the cancel icon
+    # time.sleep(2)
 
     # Assert that the User page is open
     assert "user" in driver.current_url.lower()
