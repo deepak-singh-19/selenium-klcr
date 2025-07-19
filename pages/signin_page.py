@@ -5,7 +5,8 @@ class signinPage:
         self.driver = driver
 
     def login(self, username, password):
-        self.driver.get("https://staging.klcrinvestigations.com/auth/signin/")
+        #self.driver.get("https://staging.klcrinvestigations.com/auth/signin/")
+        self.driver.get("http://67.205.148.222/insurance/app/auth/signin/")
         self.driver.maximize_window()
         self.driver.implicitly_wait(5)
 
