@@ -9,7 +9,7 @@ def ensure_drawer_expanded(driver, wait):
     Idempotent: does nothing if already expanded and 'System' is visible.
     """
     SYSTEM_XPATH = '//*[@id=":r4:"]'
-    DRAWER_TOGGLE_XPATH = '//*[@id=":r3:"]'
+    DRAWER_TOGGLE_XPATH = "/html/body/div/div[2]/div/div[1]/div/div[1]/button"
     # If the "System" link is not visible, the drawer is probably collapsed.
     if not driver.find_elements(By.XPATH, SYSTEM_XPATH):
         try:
