@@ -60,7 +60,7 @@ def test_open_role_page(driver):
     wait.until(EC.element_to_be_clickable((By.ID, 'demo-simple-select'))).click()
     time.sleep(2)
 
-    #11. Filter
+    #10. Filter
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div[2]/div[1]/div/button'))).click()
     time.sleep(2)
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/ul/div/form/div/div[1]/div/label[1]/span[1]'))).click()
@@ -69,7 +69,7 @@ def test_open_role_page(driver):
     time.sleep(2)
 
 
-    # 10. Final assertion
+    # 11. Final assertion
     assert "role" in driver.current_url.lower()
     print("Role page opened successfully")
 
