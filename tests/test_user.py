@@ -110,5 +110,5 @@ def test_open_user_page(driver):
     time.sleep(2)
 
     # Assert that the User page is open
-    assert "user" in driver.current_url.lower()
+    assert "users" in driver.current_url.lower()
     print("User page opened successfully")

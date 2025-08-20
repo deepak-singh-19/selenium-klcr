@@ -2,6 +2,7 @@ from pages.signin_page import signinPage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import time
 
 def ensure_drawer_expanded(driver, wait):
     """
@@ -32,6 +33,7 @@ def test_open_role_page(driver):
     # 3. Navigate: System -> Role
     wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='System']"))).click()
     wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/div[2]/div/div[1]/div/div[2]/ul/div[3]/div/div/div/div[1]/div[2]/span'))).click()
+    time.sleep(2)
 
     # 4. Open 'Add Role' modal
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div[2]/div[3]/button[2]'))).click()
@@ -54,6 +56,22 @@ def test_open_role_page(driver):
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[5]/div/button[3]'))).click()
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div/div/div[2]/button[2]'))).click()
 
+    #10. Show Entries
+    wait.until(EC.element_to_be_clickable((By.ID, 'demo-simple-select'))).click()
+    time.sleep(2)
+
+    #11. Filter
+    wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div[2]/div[1]/div/button'))).click()
+    time.sleep(2)
+    wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/ul/div/form/div/div[1]/div/label[1]/span[1]'))).click()
+    time.sleep(2)
+    wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/ul/div/form/div/div[2]/button[1]'))).click()
+    time.sleep(2)
+
+
     # 10. Final assertion
     assert "role" in driver.current_url.lower()
     print("Role page opened successfully")
+
+    # input("\nPress ENTER to close the browser...")
+    # driver.quit()
