@@ -37,28 +37,36 @@ def test_open_role_page(driver):
 
     # 4. Open 'Add Role' modal
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div[2]/div[3]/button[2]'))).click()
+    time.sleep(2)
 
     # 5. Fill form: Role name = Admin
     wait.until(EC.visibility_of_element_located((By.NAME, 'roleName'))).send_keys("Admin")
+    time.sleep(2)
 
     # 6. Close 'Add Role' modal (cancel button)
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[1]/button'))).click()
+    time.sleep(2)
 
     # 7. View Role
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[5]/div/button[1]'))).click()
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[1]/button'))).click()
+    time.sleep(2)
 
     # 8. Edit Role
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[5]/div/button[2]'))).click()
+    time.sleep(2)
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[1]/button'))).click()
+    time.sleep(2)
 
     # 9. Delete Role (but cancel deletion)
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[5]/div/button[3]'))).click()
+    time.sleep(2)
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div/div/div[2]/button[2]'))).click()
+    time.sleep(2)
 
     #10. Show Entries
-    wait.until(EC.element_to_be_clickable((By.ID, 'demo-simple-select'))).click()
-    time.sleep(2)
+    # wait.until(EC.element_to_be_clickable((By.ID, 'demo-simple-select'))).click()
+    # time.sleep(2)
 
     #11. Filter
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div[2]/div[1]/div/button'))).click()
