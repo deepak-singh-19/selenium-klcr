@@ -1,14 +1,17 @@
-## conftest.py  (project root)
-
+import sys
+import os
 import pytest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
-# Current setup: New browser for every test (best for beginners)
+# --- Add project root to sys.path so "pages" can be imported ---
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 @pytest.fixture()
 def driver():
+    """Fixture to launch and quit Chrome browser."""
     options = Options()
     options.add_argument("--start-maximized")
     drv = webdriver.Chrome(
@@ -18,6 +21,7 @@ def driver():
     drv.implicitly_wait(10)
     yield drv
     drv.quit()
+
 
 """
 # Future option: Single browser session for the entire test run (faster but advanced)
