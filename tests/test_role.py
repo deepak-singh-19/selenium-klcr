@@ -64,7 +64,7 @@ def test_open_role_page(driver):
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div/div/div[2]/button[2]'))).click()
     time.sleep(2)
 
-    #10. Show Entries
+    # #10. Show Entries
     # wait.until(EC.element_to_be_clickable((By.ID, 'demo-simple-select'))).click()
     # time.sleep(2)
 
@@ -76,8 +76,20 @@ def test_open_role_page(driver):
     wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/ul/div/form/div/div[2]/button[1]'))).click()
     time.sleep(2)
 
+    #12. Clear filter
+    wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div[2]/div[1]/div/button'))).click()
+    time.sleep(2)
+    wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id=":r3t:"]'))).click()
+    time.sleep(2)
 
-    # 10. Final assertion
+    #13. Search functionality
+    wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div[2]/div[2]/div/div/div/input'))).send_keys('Backend')
+    time.sleep(5)
+    #clear the search field
+    wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div[2]/div[2]/div/div/div/div'))).click() # This clears the input field programmatically
+    time.sleep(5)
+
+    # Final assertion
     assert "role" in driver.current_url.lower()
     print("Role page opened successfully")
 

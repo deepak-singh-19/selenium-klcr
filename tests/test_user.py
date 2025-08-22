@@ -63,17 +63,17 @@ def test_open_user_page(driver):
     time.sleep(2)
 
     #-----fill form with random data
-    # user_data = generate_random_user_data()
-    # driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[1]/div/div/input').send_keys(user_data['first_name'])
-    # time.sleep(2)
-    # driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[2]/div/div/input').send_keys(user_data['last_name'])
-    # time.sleep(2)
+    user_data = generate_random_user_data()
+    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[1]/div/div/input').send_keys(user_data['first_name'])
+    time.sleep(2)
+    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[2]/div/div/input').send_keys(user_data['last_name'])
+    time.sleep(2)
 
     #---Select the user type
-    # driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[3]/div/div[2]/div/div/input').click()
-    # time.sleep(2)
-    # driver.find_element(By.XPATH, f"//li[normalize-space()='{user_data['user_type']}']").click()
-    # time.sleep(2)
+    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[3]/div/div[2]/div/div/input').click()
+    time.sleep(2)
+    driver.find_element(By.XPATH, f"//li[normalize-space()='{user_data['user_type']}']").click()
+    time.sleep(2)
 
     #--------Select the role data
     # driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/form/div/div[1]/div[4]/div/div[2]/div/div/input').click()
@@ -106,8 +106,8 @@ def test_open_user_page(driver):
     # time.sleep(2)
 
 
-    driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[1]/button').click() #Click on the cancel icon
-    time.sleep(2)
+    # driver.find_element(By.XPATH, '/html/body/div[2]/div[3]/div/div[1]/button').click() #Click on the cancel icon
+    # time.sleep(2)
 
     # Assert that the User page is open
     assert "user" in driver.current_url.lower()
