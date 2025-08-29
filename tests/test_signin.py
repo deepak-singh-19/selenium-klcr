@@ -113,18 +113,18 @@ def test_valid_login(driver):
 #     assert "You are temporarily inactive, please contact support." in account_inactive.text
 #     print("Temporarily inactive User")
 #
-# def test_terminate_user(driver):
-#     signinPage(driver).login("klcrkamalsharma@gmail.com", "Test@123")
-#     wait = WebDriverWait(driver, 20)
-#     terminate_user = wait.until(EC.visibility_of_element_located(
-#         (By.XPATH, "//*[contains(text(), 'Account not found.')]")))
-#     assert "Account not found." in terminate_user.text
-#     print("Terminate User")
-#
-# def test_resigned_user(driver):
-#     signinPage(driver).login("klcrrajnishbajpai@gmail.com", "Test@123")
-#     wait = WebDriverWait(driver, 20)
-#     resigned_user = wait.until(EC.visibility_of_element_located(
-#         (By.XPATH, "//*[contains(text(), 'Account not found.')]")))
-#     assert "Account not found." in resigned_user.text
-#     print("Resigned User")
+def test_terminate_user(driver):
+    signinPage(driver).login("klcrkamalsharma@gmail.com", "Test@123")
+    wait = WebDriverWait(driver, 20)
+    terminate_user = wait.until(EC.visibility_of_element_located(
+        (By.XPATH, "//*[contains(text(), 'Account not found.')]")))
+    assert "Account not found." in terminate_user.text
+    print("Terminate User")
+
+def test_resigned_user(driver):
+    signinPage(driver).login("klcrrajnishbajpai@gmail.com", "Test@123")
+    wait = WebDriverWait(driver, 20)
+    resigned_user = wait.until(EC.visibility_of_element_located(
+        (By.XPATH, "//*[contains(text(), 'Account not found.')]")))
+    assert "Account not found." in resigned_user.text
+    print("Resigned User")
